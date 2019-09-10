@@ -1,0 +1,105 @@
+{
+    "name": "flowfile-preview",
+    "version": "0.0.1",
+    "publisher": "Ron Gruse @ Entwicklerheld",
+    "engines": {
+        "vscode": "^1.36.0"
+    },
+    "license": "",
+    "displayName": "Flowfile Preview",
+    "description": "Preview for the Entwicklerheld Flowfile to make writing and testing easier",
+    "categories": [
+        "Programming Languages"
+    ],
+    "keywords": [
+        "flowfile",
+        "flowfile.xml",
+        "preview"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "languages": [
+            {
+                "id": "flow",
+                "aliases": [
+                    "Flowfile",
+                    "Flow"
+                ],
+                "extensions": [
+                    "flowfile.xml"
+                ]
+            }
+        ],
+        "commands": [
+            {
+                "command": "flowfile.showPreviewToSide",
+                "title": "Shows the Flowfile Preview one new column",
+                "category": "Flowfile",
+                "icon": {
+                    "dark": "resources/preview-right-dark.svg",
+                    "light": "resources/preview-right-light.svg"
+                }
+            }
+        ],
+        "configuration": {
+            "title": "Flowfile Preview"
+        },
+        "menus": {
+            "editor/title": [
+                {
+                    "command": "flowfile.showPreviewToSide",
+                    "group": "navigation",
+                    "when": "editorLangId == flow"
+                }
+            ]
+        },
+        "keybindings": [
+            {
+                "command": "flowfile.showPreviewToSide",
+                "key": "ctrl+k v",
+                "mac": "cmd+k v",
+                "when": "editorLangId == flow"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "flow",
+                "scopeName": "source.flow",
+                "path": "./syntaxes/flow.tmLanguage.json"
+            }
+        ]
+    },
+    "activationEvents": [
+        "onCommand:flowfile.showPreviewToSide"
+    ],
+    "devDependencies": {
+        "@types/glob": "7.1.1",
+        "@types/mocha": "^5.2.7",
+        "@types/node": "^12.7.4",
+        "@types/vscode": "1.36.0",
+        "concurrently": "^4.1.1",
+        "glob": "7.1.4",
+        "mocha": "^6.1.4",
+        "tslint": "^5.18.0",
+        "typescript": "^3.5.3",
+        "vscode": "^1.1.35",
+        "vscode-test": "^1.0.0",
+        "webpack": "^4.35.3",
+        "webpack-cli": "^3.3.5"
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run lint && npm run compile",
+        "compile": "tsc -p . && webpack",
+        "watch": "concurrently --kill-others --allow-restart --restart-after 500 -r \"tsc -p . -w\" \"webpack -w\"",
+        "pretest": "npm run lint && npm run compile",
+        "lint": "tslint -p .",
+        "test": "node ./out/test/runTest.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "dependencies": {
+        "xml-js": "^1.6.11"
+    }
+}
