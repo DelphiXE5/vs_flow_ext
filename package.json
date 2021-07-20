@@ -1,0 +1,98 @@
+{
+    "name": "flowfile-viewer",
+    "displayName": "Flowfile Viewer",
+    "description": "Viewer for EH flowfiles",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.58.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "main": "./dist/extension.js",
+    "contributes": {
+        "languages": [
+            {
+                "id": "flow",
+                "aliases": [
+                    "Flowfile",
+                    "Flow"
+                ],
+                "extensions": [
+                    "flowfile.xml"
+                ]
+            }
+        ],
+        "commands": [
+            {
+                "command": "flowfile.showPreviewToSide",
+                "title": "Shows the Flowfile Preview one new column",
+                "category": "Flowfile",
+                "icon": {
+                    "dark": "resources/preview-right-dark.svg",
+                    "light": "resources/preview-right-light.svg"
+                }
+            }
+        ],
+        "configuration": {
+            "title": "Flowfile Preview"
+        },
+        "menus": {
+            "editor/title": [
+                {
+                    "command": "flowfile.showPreviewToSide",
+                    "group": "navigation",
+                    "when": "editorLangId == flow"
+                }
+            ]
+        },
+        "keybindings": [
+            {
+                "command": "flowfile.showPreviewToSide",
+                "key": "ctrl+k v",
+                "mac": "cmd+k v",
+                "when": "editorLangId == flow"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "flow",
+                "scopeName": "source.flow",
+                "path": "./syntaxes/flow.tmLanguage.json"
+            }
+        ]
+    },
+    "activationEvents": [
+        "onCommand:flowfile.showPreviewToSide"
+    ],
+    "scripts": {
+        "vscode:prepublish": "npm run package",
+        "compile": "webpack",
+        "watch": "webpack --watch",
+        "package": "webpack --mode production --devtool hidden-source-map",
+        "test-compile": "tsc -p ./",
+        "test-watch": "tsc -watch -p ./",
+        "pretest": "npm run test-compile && npm run lint",
+        "lint": "eslint src --ext ts",
+        "test": "node ./out/test/runTest.js"
+    },
+    "devDependencies": {
+        "@types/vscode": "^1.58.0",
+        "@types/glob": "^7.1.3",
+        "@types/mocha": "^8.2.2",
+        "@types/node": "14.x",
+        "eslint": "^7.27.0",
+        "@typescript-eslint/eslint-plugin": "^4.26.0",
+        "@typescript-eslint/parser": "^4.26.0",
+        "glob": "^7.1.7",
+        "mocha": "^8.4.0",
+        "typescript": "^4.3.2",
+        "vscode-test": "^1.5.2",
+        "ts-loader": "^9.2.2",
+        "webpack": "^5.38.1",
+        "webpack-cli": "^4.7.0"
+    },
+    "dependencies": {
+        "xml-js": "^1.6.11"
+    }
+}

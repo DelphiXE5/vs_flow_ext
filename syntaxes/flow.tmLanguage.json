@@ -1,0 +1,17 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "Flow Language Definition",
+    "patterns": [
+      { "include": "#xml" },
+      { "include": "#markdown" }
+    ],
+    "repository": {
+      "markdown": {
+        "contentName": "text.xml",
+        "patterns": [
+          { "include": "text.xml" }
+        ]
+      }
+    },
+    "scopeName": "source.flow"
+}
